@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, View, Text } from 'react-native';
 import { useFonts } from 'expo-font'; // Import the hook for font loading
+import { theme } from '../core/theme';
 
 export default function Logo() {
   const [fontsLoaded] = useFonts({
@@ -38,8 +39,9 @@ const styles = StyleSheet.create({
   text: {
     marginTop: -30,
     fontSize: 24,
+    color:theme.colors.primary,
     fontWeight: 'bold',
-    fontFamily: 'Orbitron', // Apply the Orbitron font
+    fontFamily: 'Playwrite', // Apply the Orbitron font
     marginBottom: 12,
   },
 });

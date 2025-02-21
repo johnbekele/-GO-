@@ -1,11 +1,9 @@
-
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-
-export default function BottomDrawer ({ navigation }) {
+export default function BottomDrawer({ navigation }) {
   return (
     <View style={styles.bottomDrawer}>
       <Text style={styles.drawerText}>This is a bottom drawer!</Text>
@@ -15,8 +13,6 @@ export default function BottomDrawer ({ navigation }) {
     </View>
   );
 }
-
-
 
 const styles = StyleSheet.create({
   bottomDrawer: {

@@ -7,6 +7,8 @@ import DashboardScreen from './src/screens/DashboardScreen';
 import SplashScreen from './src/screens/SplashScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import ResetPasswordScreen from './src/screens/ResetPasswordScreen';
+import { useFonts } from 'expo-font';
+import FontLoader from './src/components/FontLoader'; 
 
 const Stack = createStackNavigator();
 
@@ -23,6 +25,7 @@ export default function App() {
   }, []);
 
   return (
+     <FontLoader>
      <NavigationContainer>
       <Stack.Navigator 
         screenOptions={{
@@ -38,6 +41,7 @@ export default function App() {
         <Stack.Screen name="DashboardScreen" component={DashboardScreen} />
       </Stack.Navigator>
     </NavigationContainer>
+    </FontLoader>
  
   );
 }
