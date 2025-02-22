@@ -1,23 +1,29 @@
-import React, { useState } from 'react'
-import Background from '../components/Background'
-import BackButton from '../components/BackButton'
-import Logo from '../components/Logo'
-import Header from '../components/Header'
-import TextInput from '../components/TextInput'
-import Button from '../components/Button'
-import { emailValidator } from '../helpers/emailValidator'
+import React, { useState } from 'react';
+import Background from '../components/Background';
+import BackButton from '../components/BackButton';
+import Logo from '../components/Logo';
+import Header from '../components/Header';
+import TextInput from '../components/TextInput';
+import Button from '../components/Button';
+import { emailValidator } from '../helpers/emailValidator';
+import { useAuth } from '../context/AuthContext';
+import firebase from '../../firebaseConfig';
 
 export default function ResetPasswordScreen({ navigation }) {
-  const [email, setEmail] = useState({ value: '', error: '' })
+  const [email, setEmail] = useState({ value: '', error: '' });
 
-  const sendResetPasswordEmail = () => {
-    const emailError = emailValidator(email.value)
-    if (emailError) {
-      setEmail({ ...email, error: emailError })
-      return
+  const resetPassword = async () => {
+    const emailError = emailValidator(email.value);
+    if (emailError) setEmail({ ...email, error: emailError });
+
+    try {
+      await firebase.auth().sendPasswordResetEmail(email.value);
+      alert('Password reset email sent');
+      navigation.navigate('Login');
+    } catch (error) {
+      alert(error);
     }
-    navigation.navigate('LoginScreen')
-  }
+  };
 
   return (
     <Background>
@@ -39,11 +45,12 @@ export default function ResetPasswordScreen({ navigation }) {
       />
       <Button
         mode="contained"
-        onPress={sendResetPasswordEmail}
+        onPress={resetPassword}
         style={{ marginTop: 16 }}
       >
         Send Instructions
       </Button>
+      <Text onPress={() => navigation.navigate('Login')}>Back to Login</Text>
     </Background>
-  )
+  );
 }
