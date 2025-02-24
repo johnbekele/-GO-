@@ -6,6 +6,7 @@ import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import DashboardScreen from '../screens/DashboardScreen';
+import { ActivityIndicator, View } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -28,7 +29,15 @@ const MainStack = () => {
 };
 
 export default function AppNavigator() {
-  const { isAuthenticated } = useAuth(); // Ensure this value is coming from your AuthContext
+  const { isAuthenticated, loading } = useAuth(); // Fetching auth status and loading state
 
+  // Show loading indicator while checking authentication
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
   return isAuthenticated ? <MainStack /> : <AuthStack />;
 }

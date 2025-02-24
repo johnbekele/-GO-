@@ -3,35 +3,29 @@
     "name": "Temarigo",
     "slug": "codebox",
     "version": "1.0.0",
+    "platforms": ["ios", "android", "web"],
     "scheme": "codebox",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": true,
+    "icon": "./assets/image/icon.png",
     "splash": {
-      "image": "https://static.vecteezy.com/system/resources/previews/020/111/055/non_2x/tgo-flat-accounting-logo-design-on-white-background-tgo-creative-initials-growth-graph-letter-logo-concept-tgo-business-finance-logo-design-vector.jpg",
+      "image": "./assets/image/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "ios": {
-      "supportsTablet": true
-    },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/image/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.temarigo.app",
       "versionCode": 1
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     },
     "plugins": ["expo-font", "expo-secure-store"],
     "extra": {
       "eas": {
         "projectId": "64765135-e2ce-4bb9-adb5-ed8d25a05df1"
       }
-    }
+    },
+    "owner": "john1202"
   }
 }

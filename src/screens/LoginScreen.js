@@ -12,6 +12,7 @@ import { emailValidator } from '../helpers/emailValidator';
 import { passwordValidator } from '../helpers/passwordValidator';
 import GoogleLogo from '../components/GoogleLogo';
 import { useAuth } from '../context/AuthContext';
+
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
@@ -25,10 +26,7 @@ export default function LoginScreen({ navigation }) {
       setPassword({ ...password, error: passwordError });
       return;
     }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'DashboardScreen' }],
-    });
+    navigation.navigate('Dashboard');
   };
 
   return (
@@ -47,6 +45,7 @@ export default function LoginScreen({ navigation }) {
         autoCompleteType="email"
         textContentType="emailAddress"
         keyboardType="email-address"
+        type="email"
       />
       <TextInput
         label="Password"
@@ -56,18 +55,14 @@ export default function LoginScreen({ navigation }) {
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
+        type="password"
       />
       <View style={styles.forgotPassword}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('ResetPasswordScreen')}
-        >
+        <TouchableOpacity onPress={() => navigation.navigate('ResetPasswordScreen')}>
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
       </View>
-      <Button
-        mode="contained"
-        onPress={() => loginWithEmail(email.value, password.value)}
-      >
+      <Button mode="contained" onPress={() => onLoginPressed()}>
         Login
       </Button>
       <Button onPress={() => promptAsync()}>

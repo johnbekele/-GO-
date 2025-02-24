@@ -4,7 +4,7 @@ import TabNavigator from '../components/TabNavigator';
 
 export default function DashboardScreen() {
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <TabNavigator />
     </View>
   );

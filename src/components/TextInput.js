@@ -1,42 +1,34 @@
-import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
-import { TextInput as Input } from 'react-native-paper'
-import { theme } from '../core/theme'
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
+import { TextInput as Input } from 'react-native-paper';
+import { theme } from '../core/theme';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import { Octicons } from '@expo/vector-icons';
 
-export default function TextInput({ errorText, description, ...props }) {
+export default function TextInput({ errorText, type, description, ...props }) {
+  const [icon, setIcon] = useState();
+  const [placeholder, setplaceholder] = useState();
+
+  useEffect(() => {
+    if (type === 'password') {
+      setIcon('lock');
+      setplaceholder('Password');
+    } else if (type === 'email') {
+      setIcon('mail');
+      setplaceholder('Email');
+    } else {
+      setIcon('');
+    }
+  }, [type]);
   return (
-    <View style={styles.container}>
-      <Input
-        style={styles.input}
-        selectionColor={theme.colors.primary}
-        underlineColor="transparent"
-        mode="outlined"
-        {...props}
-      />
-      {description && !errorText ? (
-        <Text style={styles.description}>{description}</Text>
-      ) : null}
-      {errorText ? <Text style={styles.error}>{errorText}</Text> : null}
+    <View
+      className="item-center flex-row gap-4 rounded-2xl rounded-lg bg-neutral-100 px-4  "
+      style={{ height: hp(7) }}>
+      <Octicons name={icon} size={hp(2.7)} color="gray" />
+      <TextInput style={{ fontSize: hp(2.5) }} className="flex-1 font-semibold text-neutral-700" />
     </View>
-  )
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    marginVertical: 12,
-  },
-  input: {
-    backgroundColor: theme.colors.surface,
-  },
-  description: {
-    fontSize: 13,
-    color: theme.colors.secondary,
-    paddingTop: 8,
-  },
-  error: {
-    fontSize: 13,
-    color: theme.colors.error,
-    paddingTop: 8,
-  },
-})
